@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/padding_56dp"
+        android:background="@color/colorPrimary"
+        android:baselineAligned="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/padding_16dp"
+            android:layout_marginRight="@dimen/padding_16dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_title_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/title_cars"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
+

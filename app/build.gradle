@@ -1,0 +1,125 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.sevenpeakssoftware.mihira"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", '"https://www.apphusetreach.no/application/119267/"'
+        resValue "string", "app_name", "Cars"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+    signingConfigs {
+        // for production release
+        release {
+            //create keystore and place it in app folder
+            storeFile file("release.keystore")
+        }
+    }
+    buildTypes {
+        // development environment
+        dev {
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Cars(DEV)"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_logo"
+            ]
+        }
+        // production environment
+        release {
+            applicationIdSuffix ".prod"
+            versionNameSuffix "-prod"
+            //todo change this to minifyEnabled true
+            minifyEnabled false
+            //todo change this to signingConfigs.release
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_logo"
+            ]
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-common:0.10.3"
+    implementation 'com.android.support:appcompat-v7:29.0.3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:29.0.3'
+
+    // LiveData & ViewModel
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:2.17"
+    kapt "com.google.dagger:dagger-compiler:2.17"
+    compileOnly "org.glassfish:javax.annotation:3.1.1"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:2.1.15"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+
+    // RecyclerView
+    implementation "com.android.support:recyclerview-v7:29.0.0-alpha3"
+
+    // Data binding
+    kapt "com.android.databinding:compiler:3.1.4"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    // Cache image loading
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+
+    // Logging
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.18.3"
+    testImplementation "org.mockito:mockito-inline:2.16.0"
+
+    androidTestImplementation "com.android.support:support-annotations:28.0.0"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation "com.android.support.test:rules:1.0.2"
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:3.0.2") {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+}

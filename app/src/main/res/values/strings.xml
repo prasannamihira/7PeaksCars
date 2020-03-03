@@ -1,0 +1,9 @@
+<resources>
+    <string name="title_cars">Cars</string>
+
+    <!--font-->
+    <string name="roboto_medium">roboto_medium.ttf</string>
+    <string name="roboto_regular">roboto_regular.ttf</string>
+    <string name="roboto_light">roboto_light.ttf</string>
+    <string name="roboto_bold">roboto_bold.ttf</string>
+</resources>

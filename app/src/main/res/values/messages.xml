@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_cars_found">No cars found</string>
+    <string name="error_fetch_cars">Error on car request</string>
+
+
+    <string name="retry">Retry</string>
+    <string name="car_loading_error">An error occurred while loading the cars</string>
+</resources>
